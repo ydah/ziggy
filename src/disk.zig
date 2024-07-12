@@ -2,6 +2,18 @@ const std = @import("std");
 
 const PAGE_SIZE = 4096;
 
+pub const PageId = struct {
+    value: u64,
+
+    pub fn init(value: u64) PageId {
+        return PageId{ .value = value };
+    }
+
+    pub fn getValue(self: PageId) u64 {
+        return self.value;
+    }
+};
+
 pub const DiskManager = struct {
     heap_file: std.fs.File,
     next_page_id: u64,
@@ -26,5 +38,11 @@ pub const DiskManager = struct {
         });
 
         return try DiskManager.init(file);
+    }
+
+    pub fn allocate_page(self: DiskManager) !PageId {
+        const page_id = self.next_page_id;
+        self.next_page_id += 1;
+        PageId.init(page_id);
     }
 };
