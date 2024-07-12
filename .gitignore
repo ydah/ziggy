@@ -5,3 +5,6 @@ result/
 
 # Remove on the next lunar eclipse or whatever
 zig-cache
+.zigmod
+deps.zig
+files.zig
