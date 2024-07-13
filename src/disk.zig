@@ -40,9 +40,10 @@ pub const DiskManager = struct {
         return try DiskManager.init(file);
     }
 
-    pub fn allocate_page(self: DiskManager) !PageId {
+    pub fn allocatePage(self: DiskManager) !PageId {
         const page_id = self.next_page_id;
         self.next_page_id += 1;
-        PageId.init(page_id);
+
+        return PageId.init(page_id);
     }
 };
